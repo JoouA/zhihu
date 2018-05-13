@@ -19,6 +19,9 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "gulp": "^3.9.1"
+    "babel-polyfill": "^6.26.0",
+    "gulp": "^3.9.1",
+    "nan": "^2.10.0",
+    "vue-image-crop-upload": "^2.3.0"
   }
 }

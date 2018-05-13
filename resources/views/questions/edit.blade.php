@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('vendor.ueditor.assets')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -29,7 +28,7 @@
                             </div>
                             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                                 <label for="container">内容</label>
-                                <script id="container" name="body"  type="text/plain">{!! $question->body or  old('body') !!}</script>
+                                <textarea id="container" name="body"  type="text/plain">{!! $question->body or  old('body') !!}</textarea>
                                 @if ($errors->has('body'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('body') }}</strong>
@@ -43,6 +42,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@include('vendor.ueditor.assets')
+
 @section('js')
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
@@ -122,7 +125,6 @@
             });
         });
     </script>
-@endsection
 @endsection
 
 

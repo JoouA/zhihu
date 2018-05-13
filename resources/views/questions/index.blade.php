@@ -20,6 +20,9 @@
                         </div>
                     </div>
                 @endforeach
+               <div class="pull-right">
+                   {{ $questions->links() }}
+               </div>
             </div>
         </div>
     </div>

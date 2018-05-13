@@ -26,7 +26,8 @@ class Question extends Model
     public function scopePublished($query)
     {
         // 如果is_hidden是F的话  是可以显示的
-        return $query->where('is_hidden','=','F');
+//        return $query->where('is_hidden','=','F');
+        return $query->whereIsHidden('F');
     }
 
     public function answers()

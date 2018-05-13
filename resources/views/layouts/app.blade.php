@@ -63,9 +63,21 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ route('questions.create') }}">
+                                            <span class="glyphicon glyphicon-book"></span>创建问题
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('users.settings') }}">
+                                            <span class="glyphicon glyphicon-edit "></span>
+                                            编辑个人信息
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="glyphicon glyphicon-log-out"></i>
                                             退出登录
                                         </a>
 
@@ -81,15 +93,13 @@
             </div>
         </nav>
         <div class="container">
-                @include('flash::message')
+            @include('flash::message')
         </div>
         @yield('content')
     </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('js');
-    {{--<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>--}}
     <script>
         $('#flash-overlay-modal').modal();
     </script>

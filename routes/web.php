@@ -33,12 +33,6 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
-Route::get('/test',function (){
-//    return url('/home');
-//    return route('home');
-//    return action('HomeController@index');
-});
-
 // 显示当前用户的问题总数
 Route::get('/user_questions/show/{id}','UserController@index');
 
@@ -73,7 +67,7 @@ Route::post('inbox/{dialogId}/store','InboxController@store');
 Route::get('password','PasswordController@password');
 Route::post('password/update','PasswordController@update');
 
-Route::get('settings','SettingsController@index');
+Route::get('settings','SettingsController@index')->name('users.settings');
 Route::post('settings','SettingsController@store');
 
 

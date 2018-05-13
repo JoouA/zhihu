@@ -12,21 +12,21 @@
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">姓名</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->settings['name'] }}">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{  $settings['name'] or ''  }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="live" class="col-md-4 control-label">居住地</label>
                                 <div class="col-md-6">
-                                    <input id="live" type="text" class="form-control" name="live" value="{{ Auth::user()->settings['live'] }}">
+                                    <input id="live" type="text" class="form-control" name="live" value="{{  $settings['live'] or ''  }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="bio" class="col-md-4 control-label">个人描述</label>
                                 <div class="col-md-6">
-                                    <textarea id="bio" name="bio" class="form-control" >{{ Auth::user()->settings['bio'] }}</textarea>
+                                    <textarea id="bio" name="bio" class="form-control" >{{ $settings['bio'] or '' }}</textarea>
                                 </div>
                             </div>
 

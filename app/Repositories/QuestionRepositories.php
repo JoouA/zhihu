@@ -39,9 +39,15 @@ class QuestionRepositories
         return Question::find($id);
     }
 
+    /**
+     * 获取最近的问题
+     * @return mixed
+     */
     public function getQuestionsFeed(){
         // 使用scopePublished（）这个方法的时候前面的scope就不需要了 不要管为什么这么做 反正laravel就是这样定义的
-        return Question::Published()->latest('updated_at')->with('user')->get();
+        // 使用scopePublished()是$query->where('is_hidden','F');
+        // 使用了预加载
+        return Question::Published()->latest('updated_at')->with('user')->paginate(5);
     }
 
     public function getQuestionCommentsById($id){

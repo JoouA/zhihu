@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('vendor.ueditor.assets')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -20,12 +19,12 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <select name="topics[]" class="js-data-example-ajax form-control" multiple="multiple">
+                                <select name="topics[]" class="js-data-example-ajax form-control" multiple="multiple" required>
                                 </select>
                             </div>
                             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                                 <label for="container">内容</label>
-                                <script id="container" name="body" type="text/plain">{!! old('body') !!}</script>
+                                <textarea id="container" name="body" type="text/plain">{!! old('body') !!}</textarea>
                                 @if ($errors->has('body'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('body') }}</strong>
@@ -39,85 +38,86 @@
             </div>
         </div>
     </div>
-    @section('js')
-        <script type="text/javascript">
-            var ue = UE.getEditor('container');
-            ue.ready(function() {
-                ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
-            });
-            $(document).ready(function () {
-                function formatTopic (topic) {
+@endsection
+@include('vendor.ueditor.assets')
+@section('js')
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+        ue.ready(function() {
+            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
+        });
+        $(document).ready(function () {
+            function formatTopic (topic) {
 
-                    return "<div class='select2-result-repository clearfix'>" +
+                return "<div class='select2-result-repository clearfix'>" +
 
-                    "<div class='select2-result-repository__meta'>" +
+                "<div class='select2-result-repository__meta'>" +
 
-                    "<div class='select2-result-repository__title'>" +
+                "<div class='select2-result-repository__title'>" +
 
-                    topic.name ? topic.name : "Laravel"   +
+                topic.name ? topic.name : "Laravel"   +
 
-                        "</div></div></div>";
+                    "</div></div></div>";
 
-                }
-
-
-                function formatTopicSelection (topic) {
-
-                    return topic.name || topic.text;
-
-                }
+            }
 
 
-                $(".js-data-example-ajax").select2({
+            function formatTopicSelection (topic) {
 
-                    tags: true,
+                return topic.name || topic.text;
 
-                    placeholder: '选择相关话题',
+            }
 
-                    minimumInputLength: 2,
 
-                    ajax: {
+            $(".js-data-example-ajax").select2({
 
-                        url: '/api/topics',
+                tags: true,
 
-                        dataType: 'json',
+                placeholder: '选择相关话题',
 
-                        delay: 250,
+                minimumInputLength: 2,
 
-                        data: function (params) {
+                ajax: {
 
-                            return {
+                    url: '/api/topics',
 
-                                q: params.term
+                    dataType: 'json',
 
-                            };
+                    delay: 250,
 
-                        },
+                    data: function (params) {
 
-                        processResults: function (data, params) {
+                        return {
 
-                            return {
+                            q: params.term
 
-                                results: data
-
-                            };
-
-                        },
-
-                        cache: true
+                        };
 
                     },
 
-                    templateResult: formatTopic,
+                    processResults: function (data, params) {
 
-                    templateSelection: formatTopicSelection,
+                        return {
 
-                    escapeMarkup: function (markup) { return markup; }
+                            results: data
 
-                });
+                        };
+
+                    },
+
+                    cache: true
+
+                },
+
+                templateResult: formatTopic,
+
+                templateSelection: formatTopicSelection,
+
+                escapeMarkup: function (markup) { return markup; }
+
             });
-        </script>
-    @endsection
+        });
+    </script>
 @endsection
 
 
